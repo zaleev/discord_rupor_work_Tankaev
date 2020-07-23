@@ -1,17 +1,20 @@
-const Discord = require('discord.js');
-const {
-    prefix,
-    token,
-} = require('./config.json');
-const ytdl = require('ytdl-core');
-const client = new Discord.Client();
-client.login(token);
+
+const Discord = require('discord.js'); 
+const robot = new Discord.Client();
+var comms = require("./comms.js");
+const fs = require('fs');
+let config = require('./config.json');
+let token = config.token;
+let prefix = config.prefix;
 client.once('ready', () => {
-    console.log('Ready!');
+	console.log('Ready!');
 });
-client.once('reconnecting', () => {
-    console.log('Reconnecting!');
+client.login(token);
+client.on('message', message => {
+	console.log(message.content);
 });
-client.once('disconnect', () => {
-    console.log('Disconnect!');
-});
+if (message.content === '!ping') {
+	// send back "Pong." to the channel the message was sent in
+	message.channel.send('Pong.');
+}
+robot.login(token);
